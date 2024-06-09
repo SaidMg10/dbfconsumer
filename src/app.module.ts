@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DbfModule } from './dbf/dbf.module';
+import { DbfController } from './dbf/dbf.controller';
+import { DbfService } from './dbf/dbf.service';
+import { Dbf } from './dbf/entities/dbf.entity';
 
 
 @Module({
@@ -17,10 +20,11 @@ import { DbfModule } from './dbf/dbf.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    DbfModule,
+    TypeOrmModule.forFeature([Dbf]),
+      DbfModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [DbfController],
+  providers: [DbfService],
 })
 
 
